@@ -62,15 +62,24 @@ var app = new Vue({
 	}
 })
 
-
+let count = 0;
+let average;
+let max;
 function getProvider(elem) {
+	const startTime = Date.now();
 	o3dapi.NEO.getProvider()
 	.then(function(data){
-		const formatted = syntaxHighlight(data);
-		document.getElementById(elem).innerHTML = formatted;
+		const duration = Date.now() - startTime;
+		average = average ? (average + duration)/2 : duration;
+		max = max && max > duration ? max : duration;
+		count++;
+		console.log(count, Math.floor(average), max, duration);
+		// const formatted = syntaxHighlight(data);
+		// document.getElementById(elem).innerHTML = formatted;
+		getProvider();
 	})
 	.catch(function(error){
-		document.getElementById(elem).innerHTML = syntaxHighlight(error);
+		// document.getElementById(elem).innerHTML = syntaxHighlight(error);
 	});
 }
 
