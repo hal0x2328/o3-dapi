@@ -148,7 +148,8 @@ export function getNodeList({network}: GetNodeListArgs): Promise<NodeListOutput>
 }
 
 function getNodeMetadata() {
-  return fetch('https://ont.io/api/v1/candidate/info/All')
+  return fetch('https://api.ont.io/api/v1/candidate/info/All')
   .then(res => res.json())
-  .then(res => res.Result);
+  .then(res => res.Result)
+  .catch(() => ({}));
 }

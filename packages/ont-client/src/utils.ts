@@ -26,9 +26,9 @@ export function parseError(err) {
 export function getNetworkUrl(network: Network) {
   switch (network) {
     case Network.MainNet:
-      return MAIN_ONT_URL.REST_URL;
+      return 'https://dappnode1.ont.io:10334';
     case Network.TestNet:
-      return TEST_ONT_URL.REST_URL;
+      return 'https://polaris1.ont.io:10334';
   }
 }
 
