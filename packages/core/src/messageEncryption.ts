@@ -1,3 +1,5 @@
+declare const require: any;
+const isBrowser = typeof window !== 'undefined';
 import { Buffer } from 'buffer';
 import { randomFillSync } from 'randomfill';
 import { createCipheriv, createDecipheriv } from 'browserify-cipher';
@@ -19,6 +21,16 @@ export default class MessageEncryption {
   private shared;
   private nonceMap = {};
   private cipherAlgorithm = AES256;
+
+  constructor() {
+    if (!isBrowser) {
+      const crypto = require('crypto');
+      safeRandomFillSync = crypto.randomFillSync;
+      safeCreateCipheriv = crypto.createCipheriv;
+      safeCreateDecipheriv = crypto.createDecipheriv;
+      safeCreateECDH = crypto.createECDH;
+    }
+  }
 
   getPublicKey() {
     return this.key;
@@ -98,16 +110,4 @@ export default class MessageEncryption {
     }
     return this.shared;
   }
-}
-
-export function setEncryptionOverride({
-  randomFillSync,
-  createCipheriv,
-  createDecipheriv,
-  createECDH,
-}) {
-  safeRandomFillSync = randomFillSync;
-  safeCreateCipheriv = createCipheriv;
-  safeCreateDecipheriv = createDecipheriv;
-  safeCreateECDH = createECDH;
 }

@@ -58,8 +58,8 @@ o3dapiCore.setReactNativeOverrides = setReactNativeOverrides;
 //   setEventHandler(handleEvent);
 // };
 
-o3dapiCore.setNodeJSOverrides = ({crypto}) => {
-  setEncryptionOverride(crypto);
-};
+// o3dapiCore.setNodeJSOverrides = ({crypto}) => {
+//   setEncryptionOverride(crypto);
+// };
 
 export default o3dapiCore;

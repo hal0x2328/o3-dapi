@@ -38,6 +38,7 @@ module.exports = (env) => {
     },
     externals: [
       {'socket.io-client-node': 'socket.io-client'},
+      'crypto',
     ],
   };
 };
